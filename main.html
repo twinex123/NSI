@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NSI 2024</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <script src="https://kit.fontawesome.com/29ce918257.js" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+
+    <!-- MAIN CONDUCTOR -->
+    <div class="main_conductor">
+        <iframe src="" frameborder="0" id="main_conductor_iframe"></iframe>
+    </div>
+
+    <script>
+        const mainConductorIframe = document.getElementById("main_conductor_iframe");
+
+        mainConductorIframe.src = "3d_crt.html";
+    </script>
+
+    <div class="card_hero">
+        <div class="card">
+            <div class="game_image">
+
+            </div>
+            
+            <div class="game_details">
+                <div class="game_name">
+                    <h1>NSI 2024 - <span style="font-family: Henny Penny; font-size: 1.5em;">Crisis</span></h1>
+                </div>
+                <div class="game_desc">
+                    <p>Incarnez un ingénieur en sécurité informatique devant trouver des solutions en période de crise.</p>
+                </div>
+                <div class="game_requires">
+                    <i class="fa-solid fa-circle-info"></i> Pour bien exécuter le jeu : <br>
+                    <ul>
+                        <li>Il est conseillé d'utiliser Google Chrome.</li>
+                        <li>Une bonne connexion internet est nécessaire.</li>
+                        <li>Le son doit être activé, il est conseillé d'utiliser des écouteurs.</li>
+                    </ul>
+                    <i class="fa-solid fa-triangle-exclamation"></i> Attention, le jeu contient des flashs lumineux.
+                </div>
+                <br><br>
+                <div class="time_spent">
+                    <strong>Temps passé : </strong>
+                    <span id="timeSpent"></span>
+                </div>
+            </div>
+
+            <div class="game_start">
+                <button onclick="creditsStart()"><i class="fa-solid fa-play" style="margin-right: 10px;"></i>Lancer le jeu </button>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="credits">
+        <div class="credits_text">
+
+        </div>
+    </div>
+
+    <div class="menu">
+        <div class="menu_content">
+            <div class="menu_title"><h1>NSI 2024 - <span style="font-family: Henny Penny; font-size: 1em;">Crisis</span></h1></div>
+
+            <div class="close_menu">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+
+            <div class="achievements">
+                <div class="achievement_title"><h3>Achievements</h3></div>
+
+                <div class="achievements_bar">
+                    <div class="progress_container">
+                        <div class="progress_bar" style="width: 0%;"></div>
+                    </div>
+                    <p>0/10</p>
+                </div>
+            </div>
+        </div>
+        <div class="menu_footer">
+            <p>&copy; 2024 - Florestan Bente</p>
+        </div>
+    </div>
+    
+    <script src="assets/js/menu.js"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+        apiKey: "AIzaSyA0Yv8WO6S7anbR43QWK8czhXCQV2Wba8U",
+        authDomain: "crisis-fccd1.firebaseapp.com",
+        databaseURL: "https://crisis-fccd1-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "crisis-fccd1",
+        storageBucket: "crisis-fccd1.firebasestorage.app",
+        messagingSenderId: "236121315864",
+        appId: "1:236121315864:web:33940a352cdc98ef91816d",
+        measurementId: "G-XX1EB4BMP3"
+        };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);    
+    </script>
+    
+    <script type="module" src="https://cdn.jsdelivr.net/gh/twinex123/NSI@main/player.js"></script>
+</body>
+</html>
