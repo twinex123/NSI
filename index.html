@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Snake with brython</title>
+    <script src="https://cdn.jsdelivr.net/npm/brython@3.10.4/brython.min.js"></script>
+</head>
+<body onload="brython()">
+    <canvas id="gameCanvas" width="400" height="400" style="border:1px solid black;"></canvas>
+    <script type="text/python">
+        from browser import document, html, window, timer
+
+        # Initialisation de la taille de la grille et des variables
+        canvas = document["gameCanvas"]
+        ctx = canvas.getContext("2d")
+        grid_size = 20
+        snake = [{"x": 100, "y": 100}]
+        direction = "RIGHT"
+        food = {"x": 200, "y": 200}
+        game_over = False
+
+        # Fonction pour dessiner le serpent et la nourriture
+        def draw():
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            
+            # Dessiner la nourriture
+            ctx.fillStyle = "red"
+            ctx.fillRect(food["x"], food["y"], grid_size, grid_size)
+            
+            # Dessiner le serpent
+            ctx.fillStyle = "green"
+            for segment in snake:
+                ctx.fillRect(segment["x"], segment["y"], grid_size, grid_size)
+
+        # Fonction pour déplacer le serpent
+        def move_snake():
+            global game_over, direction, food
+            
+            if game_over:
+                return
+
+            # Calcul de la nouvelle position de la tête
+            head = snake[0].copy()
+            if direction == "UP":
+                head["y"] -= grid_size
+            elif direction == "DOWN":
+                head["y"] += grid_size
+            elif direction == "LEFT":
+                head["x"] -= grid_size
+            elif direction == "RIGHT":
+                head["x"] += grid_size
+
+            # Vérifier la collision avec les bords
+            if head["x"] < 0 or head["x"] >= canvas.width or head["y"] < 0 or head["y"] >= canvas.height:
+                game_over = True
+                window.alert("Game Over!")
+                return
+
+            # Vérifier la collision avec soi-même
+            if head in snake:
+                game_over = True
+                window.alert("Game Over!")
+                return
+
+            # Ajouter la nouvelle position à la tête du serpent
+            snake.insert(0, head)
+
+            # Vérifier si le serpent a mangé la nourriture
+            if head["x"] == food["x"] and head["y"] == food["y"]:
+                # Générer une nouvelle position pour la nourriture
+                from random import randint
+                food = {"x": randint(0, canvas.width // grid_size - 1) * grid_size,
+                        "y": randint(0, canvas.height // grid_size - 1) * grid_size}
+            else:
+                # Supprimer la queue du serpent
+                snake.pop()
+
+            draw()
+
+        # Gestion des touches pour changer la direction
+        def change_direction(event):
+            global direction
+            if event.key == "ArrowUp" and direction != "DOWN":
+                direction = "UP"
+            elif event.key == "ArrowDown" and direction != "UP":
+                direction = "DOWN"
+            elif event.key == "ArrowLeft" and direction != "RIGHT":
+                direction = "LEFT"
+            elif event.key == "ArrowRight" and direction != "LEFT":
+                direction = "RIGHT"
+
+        # Lancer la boucle du jeu
+        timer.set_interval(move_snake, 150)
+        document.bind("keydown", change_direction)
+
+        draw()  # Dessiner initialement le jeu
+    </script>
+</body>
+</html>
